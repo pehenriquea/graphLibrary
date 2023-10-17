@@ -15,33 +15,166 @@ typedef struct
     int node_adj[];
 } node;
 
-struct edge
-{
-    int conection[2];
-    int weight;
-    int isDirected;
-};
-
-
 int main(){
 
     int size;
+    int type;
+    int **matrix;
+    node *nd;
 
-    printf("Digite a quantidade de vertices: ");
-    scanf("%d", &size);
+    printf("Digite 0 para grafo direcionado e 1 para grafo nao direcionado: ");
+    scanf("%d", &type);
 
-    node nd[size];
+    //Directed graph
+    if (type == 0){
 
-    for (int i = 0; i < size; i++){
-        nd[i].id = i;
+        int op;
+
+        printf("Digite a quantidade de vertices: ");
+        scanf("%d", &size);
+
+        nd = malloc(size * sizeof(node));
+
+        matrix = malloc(size * sizeof(int*));
+
+        for (int i = 0; i < size; i++){
+            matrix[i] = malloc (size * sizeof(int));
+        }
+
+        printf("Nesse grafo, as arestas estao representadas pelos ids: ");
+        for (int i = 0; i < size; i++){
+            nd[i].id = i;
+            nd[i].degree = 0;
+            printf("%d   ", nd[i].id);
+        }
+
+        while(1){
+            printf("Digite 0 para adicionar arestas e 1 para remover: ");
+            scanf("%d", &op);
+
+            if (op == 0){
+                
+            } else if (op == 1){
+                
+            }
+        }
+
+    //Not directed graph
+    } else if (type == 1){
+
+        int op;
+
+        printf("Digite a quantidade de vertices: ");
+        scanf("%d", &size);
+
+        nd = malloc(size * sizeof(node));
+
+        printf("Nesse grafo, as arestas estao representadas pelos ids: ");
+        for (int i = 0; i < size; i++){
+            nd[i].id = i;
+            printf("%d   ", nd[i].id);
+        }
+
+        //while(){
+            printf("\nDigite 0 para adicionar arestas e 1 para remover: ");
+            scanf("%d", &op);
+
+            if (op == 0){
+                add_non_directed_edge(&nd, matrix);
+            } else if (op == 1){
+                remove_non_directed_edge(&nd, matrix);
+            }
+        //}
+
     }
 
-    printf("Tamanho do vetor: %d\n", sizeof(nd)/ sizeof (node));
-
+    for (int i = 0; i < size; i++){
+        free(matrix[i]);
+    }
+    free(matrix);
+    free(nd);
     return 0;
 }
 
-void edge_insertion(){
+void add_non_directed_edge (node *nd, int **matrix){
 
+    int n1, n2, weight, flag = 0;
+
+    printf("Digite um vertice a ser ligado: ");
+    scanf("%d", &n1);
+
+    printf("Digite outro vertice a ser ligado com o anterior: ");
+    scanf("%d", &n2);
+
+    printf("Digite o peso da aresta adicionada (Digite 1 caso ela nao seja ponderada): ");
+    scanf("%d", &weight);
+
+    for (int i = 0; i < nd[n1].degree; i++){
+
+        if (nd[n1].node_adj[i] == -1){
+            nd[n1].node_adj[i] = n2;
+            flag = 1;
+            break;
+        } 
+    }
+
+    if (flag == 0){
+        nd[n1].node_adj[nd[n1].degree] = n2;
+    }
+
+    flag = 0;
+
+    for (int i = 0; i < nd[n2].degree; i++){
+
+        if (nd[n2].node_adj[i] == -1){
+            nd[n2].node_adj[i] = n1;
+            flag = 1;
+            break;
+        } 
+    }
+
+    if (flag == 0){
+        nd[n2].node_adj[nd[n2].degree] = n1;
+    }
+
+    nd[n1].degree++;
+    nd[n2].degree++;
+
+    matrix[n1][n2] = weight;
+    matrix[n2][n1] = weight;
+}
+
+void remove_non_directed_edge (node *nd, int **matrix){
     
+    int n1, n2;
+
+    printf("Digite um vertice a ser removido: ");
+    scanf("%d", &n1);
+
+    printf("Digite outro vertice a ser removido junto com o anterior: ");
+    scanf("%d", &n2);
+
+    for (int i = 0; i < nd[n1].degree; i++){
+
+        if (nd[n1].node_adj[i] == n2){
+            nd[n1].node_adj[i] = -1;
+            break;
+        }
+    }
+
+    nd[n1].degree--;
+
+    for (int i = 0; i < nd[n2].degree; i++){
+
+        if (nd[n2].node_adj[i] == n1){
+            nd[n2].node_adj[i] = -1;
+            break;
+        }
+    }
+
+    nd[n2].degree--;
+
+    matrix[n1][n2] = 0;
+    matrix[n2][n1] = 0;
+
 }
