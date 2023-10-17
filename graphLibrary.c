@@ -3,37 +3,45 @@
 #include <string.h>
 #include <assert.h>
 
-struct node
+typedef struct
 {
+    int id;
     int degree;
-    int nodeadj[];
     int father;
     int discoveryTime;
     int finishedTime;
-    bool isExplored;
-    bool isVisited;
-};
+    int isExplored;
+    int isVisited;
+    int node_adj[];
+} node;
 
 struct edge
 {
     int conection[2];
     int weight;
-    bool isDirected;
+    int isDirected;
 };
 
 
-int main (){
+int main(){
 
     int size;
-    int *n_nodes;
 
-    printf("Digite a quantidade de vértices: ");
+    printf("Digite a quantidade de vertices: ");
     scanf("%d", &size);
 
-    n_nodes = malloc(size * sizeof(node));
+    node nd[size];
 
-    node nd[n_nodes];
+    for (int i = 0; i < size; i++){
+        nd[i].id = i;
+    }
 
-    free(n_nodes);
+    printf("Tamanho do vetor: %d\n", sizeof(nd)/ sizeof (node));
+
     return 0;
+}
+
+void edge_insertion(){
+
+    
 }
