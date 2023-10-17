@@ -19,10 +19,21 @@ struct edge
     int conection[2];
     int weight;
     bool isDirected;
-
 };
 
 
 int main (){
+
+    int size;
+    int *n_nodes;
+
+    printf("Digite a quantidade de vértices: ");
+    scanf("%d", &size);
+
+    n_nodes = malloc(size * sizeof(node));
+
+    node nd[n_nodes];
+
+    free(n_nodes);
     return 0;
 }
