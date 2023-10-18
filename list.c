@@ -3,24 +3,22 @@
 
 typedef struct no {
   int v; /* Vértice */
-  struct no* prox;
+  struct no *prox;
 } No;
 
 typedef struct grafo {
-  int n;      /* Número de nós */
-  No** lista;
+  int n; /* Número de nós */
+  No **lista;
 } Grafo;
 
-
-void cria_grafo(Grafo* g, int n)  { 
-  g->lista = calloc(n, sizeof(No*));
+void create_graph(Grafo *g, int n) {
+  g->lista = calloc(n, sizeof(No *));
   g->n = n;
 }
 
-void destroi(Grafo *g) {
-  int i;
-  for (i = 0; i < g->n; i++) {
-    No* l = g->lista[i]; 
+void delete_graph_list(Grafo *g) {
+  for (int i = 0; i < g->n; i++) {
+    No *l = g->lista[i];
     while (l) {
       No *r = l;
       l = l->prox;
@@ -30,21 +28,24 @@ void destroi(Grafo *g) {
   free(g->lista);
 }
 
+// Adicionando aresta na lista de adjacência de v1
+void add_edge_list(Grafo *g, int v1, int v2) {
+  No **a = &g->lista[v1];
+  while (*a != NULL && (*a)->v < v2) { // salvando os vértices em ordem
+                                       // crescente
+    a = &(*a)->prox;
+  }
 
-void adiciona_aresta(Grafo *g, int v1, int v2) {
-  No **ap_l = &g->lista[v1];
-  while (*ap_l != NULL &&
-	 (*ap_l)->v < v2)
-    ap_l = &(*ap_l)->prox;
-  if (*ap_l == NULL || (*ap_l)->v != v2) {
-    No* n = malloc(sizeof(No));
+  if (*a == NULL || (*a)->v != v2) { // evita salvar vértices já salvos
+    No *n = malloc(sizeof(No));
     n->v = v2;
-    n->prox = *ap_l;
-    *ap_l = n;
+    n->prox = *a;
+    *a = n;
   }
 }
 
-int existe_aresta(Grafo *g, int v1, int v2) {
+// Retorna True (1) ou False (0) caso exista uma aresta entre v1 e v2
+int has_edge_list(Grafo *g, int v1, int v2) {
   No *l = g->lista[v1];
   while (l != NULL && l->v < v2)
     l = l->prox;
@@ -53,42 +54,39 @@ int existe_aresta(Grafo *g, int v1, int v2) {
   return 0;
 }
 
-void remove_aresta(Grafo *g, int v1, int v2) {
-  No **ap_l = &g->lista[v1];
-  while (*ap_l != NULL &&
-	 (*ap_l)->v < v2)
-    ap_l = &(*ap_l)->prox;
-  if (*ap_l != NULL && (*ap_l)->v == v2) {
-    No* r = *ap_l;
-    *ap_l = (*ap_l)->prox;
+// Removendo aresta da lista de adjacência de v1
+void remove_edge_list(Grafo *g, int v1, int v2) {
+  No **a = &g->lista[v1];
+  while (*a != NULL && (*a)->v < v2)
+    a = &(*a)->prox;
+  if (*a != NULL && (*a)->v == v2) {
+    No *r = *a;
+    *a = (*a)->prox;
     free(r);
   }
 }
 
-/* Deve imprimir grafos no seguinte formato:
-
-  Grafo dirigido
-
-    0 ----> 1 --->2
-    ^       ^
-    |       |
-    4 <-----3<----5
-
-    E = {<0,1>,<1,2><3,1>,<4,0>,<5,3>}
-
-*/
-
-void imprime_grafo(Grafo *g) {
+void print_graph(Grafo *gr) {
+  for (int i = 0; i < gr->n; i++) {
+    printf("v%d", i);     // Imprimo em qual aresta estou
+    No *a = gr->lista[i]; // chamo a cabeça da lista de adjacencia desta aresta
+    while (a) {           // enquanto as adjacencias não forem nula
+      printf(" --> v%d", a->v); // imprimo o vértice
+      a = a->prox;              // passo para proxima adjacencia
+    }
+    printf("\n");
+  }
 }
 
 int main() {
   Grafo g;
-  cria_grafo(&g, 6);
-  adiciona_aresta(&g,0,1);
-  adiciona_aresta(&g,1,2);
-  adiciona_aresta(&g,3,1);
-  adiciona_aresta(&g,4,0);
-  adiciona_aresta(&g,5,3);
+  create_graph(&g, 6);
+  add_edge_list(&g, 0, 1);
+  add_edge_list(&g, 1, 2);
+  add_edge_list(&g, 3, 1);
+  add_edge_list(&g, 4, 0);
+  add_edge_list(&g, 5, 3);
+  add_edge_list(&g, 5, 5);
+  print_graph(&g);
   return 0;
 }
-
