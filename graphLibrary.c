@@ -18,6 +18,7 @@ typedef struct
 void add_non_directed_edge(node *nd, int **matrix);
 void remove_non_directed_edge(node *nd, int **matrix);
 void add_directed_edge(node *nd, int **matrix);
+void remove_directed_edge(node *nd, int **matrix);
 
 int main(){
 
@@ -67,6 +68,7 @@ int main(){
             if (op == 0){
                 add_directed_edge(&nd, matrix);
             } else if (op == 1){
+                remove_directed_edge(&nd, matrix);
             }
         //}
 
@@ -239,7 +241,7 @@ void add_directed_edge(node *nd, int **matrix){
 
 }
 
-void remove_non_directed_edge (node *nd, int **matrix){
+void remove_directed_edge (node *nd, int **matrix){
 
     int n1, n2;
 
