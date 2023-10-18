@@ -1,13 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 typedef struct no {
   int v; /* Vertice (id)*/
   struct no *prox;
 } No;
+
 typedef struct grafo {
   int n; /* Number of nodes */
   No **lista;
 } Grafo;
+
 typedef struct
 {
     int id;
@@ -42,8 +45,6 @@ void is_nodes_connected();
 Grafo g; // Graph g global variable
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-//
 void create_graph_list(Grafo *g, int n) {
   g->lista = calloc(n, sizeof(No *));
   g->n = n;
@@ -51,7 +52,6 @@ void create_graph_list(Grafo *g, int n) {
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-//
 void delete_graph_list(Grafo *g) {
   for (int i = 0; i < g->n; i++) {
     No *l = g->lista[i];
@@ -73,6 +73,7 @@ void add_edge_list(Grafo *g, int v1, int v2) {
                                        // crescente
     a = &(*a)->prox;
   }
+
   if (*a == NULL || (*a)->v != v2) { // evita salvar vértices já salvos
     No *n = malloc(sizeof(No));
     n->v = v2;
@@ -92,6 +93,7 @@ int has_edge_list(Grafo *g, int v1, int v2) {
     return 1;
   return 0;
 }
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // Removendo aresta da lista de adjacência de v1
 void remove_edge_list(Grafo *g, int v1, int v2) {
@@ -106,6 +108,7 @@ void remove_edge_list(Grafo *g, int v1, int v2) {
     printf("Aresta inexistente!");
   }
 }
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 //Print graph that uses adjacency list
 void print_graph_list(Grafo *gr) {
@@ -122,37 +125,48 @@ void print_graph_list(Grafo *gr) {
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 //
-//Add edges for directed graphs
 void add_non_directed_edge (node *nd, int **matrix){
 
     int n1, n2, weight, flag = 0;
+
     printf("Digite um vertice a ser ligado: ");
     scanf("%d", &n1);
+
     printf("Digite outro vertice a ser ligado com o anterior: ");
     scanf("%d", &n2);
+
     printf("Digite o peso da aresta adicionada (Digite 1 caso ela nao seja ponderada): ");
     scanf("%d", &weight);
+
+
     for (int i = 0; i < nd[n1].degree; i++){
+
         if (nd[n1].node_adj[i] == -1){
             nd[n1].node_adj[i] = n2;
             flag = 1;
             break;
         } 
     }
+
     if (flag == 0){
         nd[n1].node_adj[nd[n1].degree] = n2;
     }
+
     flag = 0;
+
     for (int i = 0; i < nd[n2].degree; i++){
+
         if (nd[n2].node_adj[i] == -1){
             nd[n2].node_adj[i] = n1;
             flag = 1;
             break;
         } 
     }
+
     if (flag == 0){
         nd[n2].node_adj[nd[n2].degree] = n1;
     }
+
     nd[n1].degree++;
     nd[n2].degree++;
 
@@ -161,63 +175,38 @@ void add_non_directed_edge (node *nd, int **matrix){
 
     add_edge_list(&g, n1, n2);
     add_edge_list(&g, n2, n1);
-
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 //
-//Remove edges for non directed graphs
 void remove_non_directed_edge (node *nd, int **matrix){
   int n1, n2;
 
-    int n1, n2;
-
   printf("Digite um vertice a ser removido: ");
   scanf("%d", &n1);
-    printf("Digite um vertice a ser removido: ");
-    scanf("%d", &n1);
 
   printf("Digite outro vertice a ser removido junto com o anterior: ");
   scanf("%d", &n2);
-    printf("Digite outro vertice a ser removido junto com o anterior: ");
-    scanf("%d", &n2);
 
   for (int i = 0; i < nd[n1].degree; i++){
-    for (int i = 0; i < nd[n1].degree; i++){
 
       if (nd[n1].node_adj[i] == n2){
           nd[n1].node_adj[i] = -1;
           break;
       }
   }
-        if (nd[n1].node_adj[i] == n2){
-            nd[n1].node_adj[i] = -1;
-            break;
-        }
-    }
 
   nd[n1].degree--;
-    nd[n1].degree--;
 
   for (int i = 0; i < nd[n2].degree; i++){
-    for (int i = 0; i < nd[n2].degree; i++){
 
       if (nd[n2].node_adj[i] == n1){
           nd[n2].node_adj[i] = -1;
           break;
       }
   }
-        if (nd[n2].node_adj[i] == n1){
-            nd[n2].node_adj[i] = -1;
-            break;
-        }
-    }
 
   nd[n2].degree--;
-    nd[n2].degree--;
-
-    matrix[n1][n2] = 0;
-    matrix[n2][n1] = 0;
 
   matrix[n1][n2] = 0;
   matrix[n2][n1] = 0;
@@ -228,29 +217,20 @@ void remove_non_directed_edge (node *nd, int **matrix){
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 //
-//Add edges for directed graphs
 void add_directed_edge(node *nd, int **matrix){
 
   int n1, n2, weight, flag;
-    int n1, n2, weight, flag;
 
   printf("Digite o vertice de saida: ");
   scanf("%d", &n1);
-    printf("Digite o vertice de saida: ");
-    scanf("%d", &n1);
 
   printf("Digite o vertice de chegada: ");
   scanf("%d", &n2);
-    printf("Digite o vertice de chegada: ");
-    scanf("%d", &n2);
 
   printf("Digite o peso da aresta adicionada (Digite 1 caso ela nao seja ponderada): ");
   scanf("%d", &weight);
-    printf("Digite o peso da aresta adicionada (Digite 1 caso ela nao seja ponderada): ");
-    scanf("%d", &weight);
 
   for (int i = 0; i < nd[n1].degree; i++){
-    for (int i = 0; i < nd[n1].degree; i++){
 
       if (nd[n1].node_adj[i] == -1){
           nd[n1].node_adj[i] = n2;
@@ -258,25 +238,12 @@ void add_directed_edge(node *nd, int **matrix){
           break;
       } 
   }
-        if (nd[n1].node_adj[i] == -1){
-            nd[n1].node_adj[i] = n2;
-            flag = 1;
-            break;
-        } 
-    }
 
   if (flag == 0){
       nd[n1].node_adj[nd[n1].degree] = n2;
   }
-    if (flag == 0){
-        nd[n1].node_adj[nd[n1].degree] = n2;
-    }
 
   flag = 0;
-    flag = 0;
-
-    nd[n1].degree++;
-    matrix[n1][n2] = weight;
 
   nd[n1].degree++;
   matrix[n1][n2] = weight;
@@ -286,50 +253,32 @@ void add_directed_edge(node *nd, int **matrix){
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 //
-//Remove edges for directed graphs
 void remove_directed_edge (node *nd, int **matrix){
 
   int n1, n2;
-    int n1, n2;
 
   printf("Digite o vertice de saida: ");
   scanf("%d", &n1);
-    printf("Digite o vertice de saida: ");
-    scanf("%d", &n1);
 
   printf("Digite um vértice de chegada alcancavel pelo vertice anteriormente digitado: ");
   scanf("%d", &n2);
-    printf("Digite um vértice de chegada alcancavel pelo vertice anteriormente digitado: ");
-    scanf("%d", &n2);
 
   if (matrix[n1][n2] != 0){
-    if (matrix[n1][n2] != 0){
 
       for (int i = 0; i < nd[n1].degree; i++){
-        for (int i = 0; i < nd[n1].degree; i++){
 
           if (nd[n1].node_adj[i] == n2){
               nd[n1].node_adj[i] = -1;
               break;
           }
       }
-            if (nd[n1].node_adj[i] == n2){
-                nd[n1].node_adj[i] = -1;
-                break;
-            }
-        }
 
       nd[n1].degree--;
-        nd[n1].degree--;
 
       matrix[n1][n2] = 0;
 
       remove_edge_list(&g, n1, n2);
   } else printf("Vertice nao diretamente alcançavel (não são vizinhos).");
-        matrix[n1][n2] = 0;
-
-    } else
-        printf("Vertice nao alcancavel.");
 
 }
 
@@ -425,75 +374,96 @@ int main(){
   int type;
   int **matrix;
   node *nd;
+
   printf("Digite 0 para grafo direcionado e 1 para grafo nao direcionado: ");
   scanf("%d", &type);
   create_graph_list(&g, 6); //Creating graph fo adjacency list
-  
+
   //Directed graph
   if (type == 0){
+
       int op;
+
       printf("Digite a quantidade de vertices: ");
       scanf("%d", &size);
+
       nd = malloc(size * sizeof(node));
+
       matrix = malloc(size * sizeof(int*));
+
       for (int i = 0; i < size; i++){
           matrix[i] = malloc (size * sizeof(int));
       }
+
       //Initializing matrix with 0
       for (int i = 0; i < size; i++){
           for (int j = 0; j < size; j++){
               matrix[i][j] = 0;
           }
       }
+
       printf("Nesse grafo, as arestas estao representadas pelos ids: ");
       for (int i = 0; i < size; i++){
           nd[i].id = i;
           nd[i].degree = 0;
           printf("%d   ", nd[i].id);
       }
+
       //Menu
       //while(1){
           printf("\nDigite 0 para adicionar arestas e 1 para remover: ");
           scanf("%d", &op);
+
           if (op == 0){
               add_directed_edge(&nd, matrix);
           } else if (op == 1){
               remove_directed_edge(&nd, matrix);
           }
       //}
+
   //Not directed graph
   } else if (type == 1){
+
       int op;
+
       printf("Digite a quantidade de vertices: ");
       scanf("%d", &size);
+
       nd = malloc(size * sizeof(node));
+
       matrix = malloc(size * sizeof(int*));
+
       for (int i = 0; i < size; i++){
           matrix[i] = malloc (size * sizeof(int));
       }
+
       //Initializing matrix with 0
       for (int i = 0; i < size; i++){
           for (int j = 0; j < size; j++){
               matrix[i][j] = 0;
           }
       }
+
       printf("Nesse grafo, as arestas estao representadas pelos ids: ");
       for (int i = 0; i < size; i++){
           nd[i].id = i;
           printf("%d   ", nd[i].id);
       }
+
       //Menu
       //while(1){
           printf("\nDigite 0 para adicionar arestas e 1 para remover: ");
           scanf("%d", &op);
+
           if (op == 0){
               add_non_directed_edge(&nd, matrix);
           } else if (op == 1){
               remove_non_directed_edge(&nd, matrix);
           }
       //}
+
   }
-  
+
   /*add_edge_list(&g, 0, 1);
   add_edge_list(&g, 1, 2);
   add_edge_list(&g, 3, 1);
@@ -505,11 +475,11 @@ int main(){
   remove_edge_list(&g, 5, 3);
   print_graph_list(&g);
   remove_edge_list(&g, 3, 5);*/
-  
+
   printf("\n");
   print_graph_list(&g);
   printf("\n");
-  
+
   for (int i = 0; i < size; i++){
       free(matrix[i]);
   }
