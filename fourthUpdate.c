@@ -471,9 +471,10 @@ int main(){
   printf("Digite 0 para grafo direcionado e 1 para grafo nao direcionado: ");
   scanf("%d", &type);
 
-  create_graph_list(&g, size); //Creating graph fo adjacency list
   printf("Digite a quantidade de vertices: ");
   scanf("%d", &size);
+  
+  create_graph_list(&g, size); //Creating graph fo adjacency list
 
   node nd[size];
 
