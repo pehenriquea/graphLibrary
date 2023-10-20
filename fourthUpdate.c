@@ -41,6 +41,8 @@ int is_graph_connected();
 int is_graph_regular(node *nd, Grafo *g);
 int is_graph_complete(node *nd, Grafo *g);
 int is_nodes_connected(node *nd, Grafo *g);
+void print_matrix(Grafo *g, int **matrix);
+void generate_file(Grafo *g, int **matrix);
 void breadth_first_search(node *nd, Grafo *g);
 
 Grafo g; // Graph g global variable
@@ -414,7 +416,7 @@ void print_matrix(Grafo *g, int **matrix){
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 //Generate CSV file for Gephi representation
-int generate_file(Grafo *g, int **matrix){
+void generate_file(Grafo *g, int **matrix){
 
   int **m_aux, r;
   FILE *arq = fopen("grafo.csv", "w");
