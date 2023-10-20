@@ -45,14 +45,14 @@ void breadth_first_search(node *nd, Grafo *g);
 
 Grafo g; // Graph g global variable
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
+//create the adjacent list
 void create_graph_list(Grafo *g, int n) {
   g->lista = calloc(n, sizeof(No *));
   g->n = n;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
+//Delete the entire adjacent list
 void delete_graph_list(Grafo *g) {
   for (int i = 0; i < g->n; i++) {
     No *l = g->lista[i];
@@ -66,7 +66,6 @@ void delete_graph_list(Grafo *g) {
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 // Adicionando aresta na lista de adjacência de v1
 void add_edge_list(Grafo *g, int v1, int v2) {
   No **a = &g->lista[v1];
@@ -84,7 +83,6 @@ void add_edge_list(Grafo *g, int v1, int v2) {
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
 // Retorna True (1) ou False (0) caso exista uma aresta entre v1 e v2
 int has_edge_list(Grafo *g, int v1, int v2) {
   No *l = g->lista[v1];
@@ -125,7 +123,7 @@ void print_graph_list(Grafo *gr) {
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-//
+//Add an edge from the non directed graph
 void add_non_directed_edge (node *nd, int **matrix){
 
     int n1, n2, weight, flag = 0;
@@ -178,7 +176,7 @@ void add_non_directed_edge (node *nd, int **matrix){
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-//
+//Remove an edge from the non directed graph
 void remove_non_directed_edge (node *nd, int **matrix){
   int n1, n2;
 
@@ -216,7 +214,7 @@ void remove_non_directed_edge (node *nd, int **matrix){
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-//
+//Add an edge to the directed graph
 void add_directed_edge(node *nd, int **matrix){
 
   int n1, n2, weight, flag;
@@ -254,7 +252,7 @@ void add_directed_edge(node *nd, int **matrix){
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-//
+//Remove an edge from the directed graph
 void remove_directed_edge (node *nd, int **matrix){
 
   int n1, n2;
@@ -396,7 +394,7 @@ int is_nodes_connected(node *nd, Grafo *g){
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-//
+//Show on screen the resulting matrix
 void print_matrix(Grafo *g, int **matrix){
 
   printf(" \t");
@@ -415,7 +413,7 @@ void print_matrix(Grafo *g, int **matrix){
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-//
+//Generate CSV file for Gephi representation
 int generate_file(Grafo *g, int **matrix){
 
   int **m_aux, r;
