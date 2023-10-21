@@ -578,6 +578,8 @@ void breadth_first_search(node *nd, Grafo *g, int source, int node){
 
   queue[start] = source;
 
+
+  printf("\nCaminho de %d: ", source);
   while (start < len_queue){
 
     if (queue[start] == node){
@@ -588,6 +590,7 @@ void breadth_first_search(node *nd, Grafo *g, int source, int node){
         if (nd[start].isVisited == 0){
           nd[start].isVisited = 1;
           queue[len_queue] = nd[start].id;
+          printf("--> %d ", nd[start].id);
           len_queue++;
         }
       }
@@ -598,9 +601,9 @@ void breadth_first_search(node *nd, Grafo *g, int source, int node){
   }
 
   if (result == 0)
-    printf("Vertice nao encontrado no grafo.");
+    printf("\nVertice nao encontrado no grafo.\n");
   else
-    printf("Vertice encontrado no grafo.");
+    printf("\nVertice encontrado no grafo.\n");
 
 }
 
