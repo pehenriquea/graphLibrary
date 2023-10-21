@@ -53,7 +53,7 @@ void print_matrix(Grafo *g, int **matrix);
 void generate_file(Grafo *g, int **matrix);
 void depth_first_search(node *nd, Grafo *g, int vDfs);
 int dfs(node *nd, int v, int time);
-void breadth_first_search(node *nd, Grafo *g, int source, int node);
+void breadth_first_search(node *nd, Grafo *g, int **matrix, int source, int node);
 void menu(node *nd, Grafo *g, int **matrix);
 
 Grafo g; // Graph g global variable
@@ -564,12 +564,13 @@ int dfs(node *nd, int v, int time) {
 
 //Breadth First Search Function
 //Depending on wich node you begin you will have a different result
-void breadth_first_search(node *nd, Grafo *g, int source, int node){
+void breadth_first_search(node *nd, Grafo *g, int **matrix, int source, int node){
 
   int queue[g->n];
   int start = 0;
   int len_queue = 1;
   int result = 0;
+  int flag = 0;
 
   for (int i = 0; i < g->n; i++){
     queue[i] = NULL;
@@ -578,22 +579,29 @@ void breadth_first_search(node *nd, Grafo *g, int source, int node){
 
   queue[start] = source;
 
-
-  printf("\nCaminho de %d: ", source);
+  printf("\nCaminho que passa por %d até %d: ", source, node);
   while (start < len_queue){
+
+    for (int i = 0; i < g->n; i++){
+      for (int j = 0; j <g->n; j++){
+        if (matrix[i][j] != 0 && i == queue[start]){
+          flag = 1;
+        } 
+      }
+    }
 
     if (queue[start] == node){
       result = 1;
       break;
     } else {
-      for (int i = 0; i < nd[start].degree; i++){
-        if (nd[start].isVisited == 0){
-          nd[start].isVisited = 1;
-          queue[len_queue] = nd[start].id;
-          printf("--> %d ", nd[start].id);
-          len_queue++;
+        for (int i = 0; i < g->n; i++){
+          if (nd[start].isVisited == 0 && flag == 1){
+            nd[start].isVisited = 1;
+            queue[len_queue] = nd[start].id;
+            printf("--> %d ", nd[start].id); 
+            len_queue++;
+          }
         }
-      }
     }
 
     start++;
@@ -684,7 +692,7 @@ void menu(node *nd, Grafo *g, int **matrix){
         scanf("%d", &source);
         printf("Escolha o vértice que deseja encontrar: \n");
         scanf("%d", &search);
-        breadth_first_search(nd, g, source, search);
+        breadth_first_search(nd, g, matrix, source, search);
         
       break;
     }
