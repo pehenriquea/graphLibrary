@@ -55,7 +55,7 @@ void depth_first_search(node *nd, Grafo *g, int vDfs);
 int dfs(node *nd, int v, int time);
 int breadth_first_search(node *nd, Grafo *g, int **matrix, int source, int node);
 void is_connected(int **matrix);
-void dfs_connected(int **matrix, int v, bool *visited)
+void dfs_connected(int **matrix, int v, bool *visited);
 void menu(node *nd, Grafo *g, int **matrix);
 
 Grafo g; // Graph g global variable
