@@ -53,7 +53,7 @@ void print_matrix(Grafo *g, int **matrix);
 void generate_file(Grafo *g, int **matrix);
 void depth_first_search(node *nd, Grafo *g, int vDfs);
 int dfs(node *nd, int v, int time);
-void breadth_first_search(node *nd, Grafo *g, int **matrix, int source, int node);
+int breadth_first_search(node *nd, Grafo *g, int **matrix, int source, int node);
 void menu(node *nd, Grafo *g, int **matrix);
 
 Grafo g; // Graph g global variable
@@ -564,12 +564,11 @@ int dfs(node *nd, int v, int time) {
 
 //Breadth First Search Function
 //Depending on wich node you begin you will have a different result
-void breadth_first_search(node *nd, Grafo *g, int **matrix, int source, int node){
+int breadth_first_search(node *nd, Grafo *g, int **matrix, int source, int node){
 
   int queue[g->n];
   int start = 0;
   int len_queue = 1;
-  int result = 0;
   int flag = 0;
 
   for (int i = 0; i < g->n; i++){
@@ -579,7 +578,7 @@ void breadth_first_search(node *nd, Grafo *g, int **matrix, int source, int node
 
   queue[start] = source;
 
-  printf("\nCaminho que passa por %d até %d: ", source, node);
+  printf("\nCaminho que passa por %d ate %d: ", source, node);
   while (start < len_queue){
 
     for (int i = 0; i < g->n; i++){
@@ -591,7 +590,7 @@ void breadth_first_search(node *nd, Grafo *g, int **matrix, int source, int node
     }
 
     if (queue[start] == node){
-      result = 1;
+      return 1;
       break;
     } else {
         for (int i = 0; i < g->n; i++){
@@ -608,10 +607,7 @@ void breadth_first_search(node *nd, Grafo *g, int **matrix, int source, int node
     
   }
 
-  if (result == 0)
-    printf("\nVertice nao encontrado no grafo.\n");
-  else
-    printf("\nVertice encontrado no grafo.\n");
+  return 0;
 
 }
 
@@ -619,7 +615,7 @@ void breadth_first_search(node *nd, Grafo *g, int **matrix, int source, int node
 
 // Menu Options
 void menu(node *nd, Grafo *g, int **matrix){
-  int op, vDfs, source, search;
+  int op, vDfs, source, search, ret_bfs;
 
   while(op != 10){
     printf("\nEscolha uma opção:\n");
@@ -692,7 +688,12 @@ void menu(node *nd, Grafo *g, int **matrix){
         scanf("%d", &source);
         printf("Escolha o vértice que deseja encontrar: \n");
         scanf("%d", &search);
-        breadth_first_search(nd, g, matrix, source, search);
+        ret_bfs = breadth_first_search(nd, g, matrix, source, search);
+
+        if (ret_bfs == 0)
+          printf("\nVertice nao encontrado no grafo.\n");
+        else
+          printf("\nVertice encontrado no grafo.\n");
         
       break;
     }
