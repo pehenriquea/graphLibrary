@@ -491,6 +491,8 @@ void generate_file(Grafo *g, int **matrix){
       free(m_aux[i]);
   }
   fclose(arq);
+
+  printf("Arquivo grafo.csv foi criado com sucesso!\n");
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
