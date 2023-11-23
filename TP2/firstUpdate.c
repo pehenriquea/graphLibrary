@@ -24,6 +24,7 @@ typedef struct {
   int id;
   int degree;
   int father;
+  int distance;
   int discoveryTime;
   int finishedTime;
   int isExplored;
