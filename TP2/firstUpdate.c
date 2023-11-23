@@ -621,6 +621,7 @@ void is_graph_connected(int **matrix){
   for(int i = 0; i < g.n; i++){
     if(visitados[i] == false){
       printf("O grafo não é conexo");
+      return ;
     }
   }
   
@@ -773,6 +774,7 @@ void menu(node *nd, Grafo *g, int **matrix){
         }else{
           printf("Grafo não é regular!\n");
         }
+      break;
 
       case 6:
         if(is_nodes_connected(nd, g)){
