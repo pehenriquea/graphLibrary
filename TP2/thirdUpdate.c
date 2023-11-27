@@ -716,16 +716,20 @@ void random_node_not_conected(node *nd, int **matrix) {
     if (flag == 0) {
       nd[b].node_adj[nd[b].degree] = a;
     }
-
-    nd[a].degree++;
-    nd[b].degree++;
-
+    
     matrix[a][b] = w;
     matrix[b][a] = w;
 
     add_edge_list(&g, a, b);
     add_edge_list(&g, b, a);
   }
+
+  for (int i = 0; i < g.n; i++)
+    for (int j = 0; j < g.n; j++){
+      if (matrix[i][j] != 0)
+        nd[i].degree++;
+    }
+  
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
