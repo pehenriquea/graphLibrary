@@ -36,7 +36,7 @@ No projeto também estão desenvolvidos os algoritmos de caminho mínimo:
 
 
   Resultado das métricas:
-                                 500 vértices                                 1.000 vértices                                                 10.000
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 500 vértices &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.000 vértices                                                 10.000
   Bellman-Ford:                  3 segundo                                    76 segundos                                                    x segundos
   Dijkstra:                      1 segundo                                    8 segundos                                                     x segundos
  Ford-Warshall:                  1 segundo                                    3 segundos                                                     x segundos
