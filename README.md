@@ -27,3 +27,16 @@ As estruturas (structs) utilizadas no projeto são:
 - node --> estrutura criada para auxiliar na gravação dos dados importantes dos nós. Ela possui as informações: id, grau do nó, pai / tempo de descoberta e tempo de término / já explorado / já visitado (utilizado para as buscas), e uma lista com seus nós adjacentes.
   
 ![image](https://github.com/pehenriquea/graphLibrary/assets/73960096/87fb48e3-f45c-45a8-8cc7-83065bbede59)
+
+No projeto também estão desenvolvidos os algoritmos de caminho mínimo:
+- Dijkstra
+- Bellman-Ford
+- Ford-Warshall
+- A*
+
+
+  Resultado das métricas:
+                                 500 vértices                                 1.000 vértices                                                 10.000
+  Bellman-Ford:                  3 segundo                                    76 segundos                                                    x segundos
+  Dijkstra:                      1 segundo                                    8 segundos                                                     x segundos
+ Ford-Warshall:                  1 segundo                                    3 segundos                                                     x segundos
