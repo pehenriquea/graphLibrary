@@ -1,7 +1,7 @@
 # Algortimo em Grafos - Biblioteca de Grafos
-💻 Integrantes: Isabela Ferreira Scarabelli, Lucas José de Freitas e Pedro Henrique de Almeida Santos.
+💻 Integrantes: Isabela Ferreira Scarabelli e Pedro Henrique de Almeida Santos.
 
-📖 Disciplina: Sistemas Operacionais
+📖 Disciplina: Algoritmos em Grafos
 
 🏫 Pontifícia Universidade Católica de Minas Gerais
 
