@@ -35,8 +35,8 @@ No projeto também estão desenvolvidos os algoritmos de caminho mínimo:
 - A*
 
 
-  Resultado das métricas:
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 500 vértices &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.000 vértices                                                 10.000
+Resultado das métricas:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 500 vértices &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.000 vértices &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10.000
 
 Bellman-Ford:                  3 segundo                                    76 segundos                                                    x segundos
 
