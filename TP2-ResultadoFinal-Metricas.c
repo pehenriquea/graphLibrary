@@ -13,8 +13,8 @@ Pedro Henrique de Almeida Santos
 #include <time.h>
 
 #define INFINITO 99999999
-#define ROWS 800
-#define COLS 800
+#define ROWS 400
+#define COLS 400
 
 typedef struct no {
   int v; /* Vertice (id)*/
@@ -343,7 +343,7 @@ void remove_directed_edge(node *nd, int **matrix) {
   printf("Digite o vertice de saida: ");
   scanf("%d", &n1);
 
-  printf("Digite um vértice de chegada alcancavel pelo vertice anteriormente "
+  printf("Digite um vertice de chegada alcancavel pelo vertice anteriormente "
          "digitado: ");
   scanf("%d", &n2);
 
@@ -644,12 +644,12 @@ void is_graph_connected(int **matrix) {
 
   for (int i = 0; i < g.n; i++) {
     if (visitados[i] == false) {
-      printf("O grafo não é conexo");
+      printf("O grafo nao e conexo");
       return;
     }
   }
 
-  printf("O grafo é conexo");
+  printf("O grafo e conexo");
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -792,7 +792,7 @@ void PrintCaminho(int s, int v) {
   if (v == s)
     printf("  %d  ", s);
   else if (pred[v] == -1)
-    printf("Não existe caminho de %d a %d ", s, v);
+    printf("Nao existe caminho de %d a %d ", s, v);
   else {
     PrintCaminho(s, pred[v]);
     printf("  %d  ", v);
@@ -803,7 +803,7 @@ void PrintCaminho(int s, int v) {
 
 void printMatrixBF(int v) {
   for (int i = 0; i < g.n; i++) {
-    printf("Distância de %d para %d = %d \n", v, i, dist[i]);
+    printf("Distancia de %d para %d = %d \n", v, i, dist[i]);
     printf("Predecessor de %d = %d \n\n", i, pred[i]);
   }
 }
@@ -848,7 +848,7 @@ void floyd_warshall(node *nd, int **matrix) {
 void printMatrixFW() {
   for (int i = 0; i < g.n; i++) {
     for (int j = 0; j < g.n; j++) {
-      printf("Distância de %d para %d = %d \n", i, j, distFw[i][j]);
+      printf("Distancia de %d para %d = %d \n", i, j, distFw[i][j]);
     }
     printf(" - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
   }
@@ -942,9 +942,9 @@ void initialize_grid() {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 void a_star(){
-  printf("X Início: ");
+  printf("X Inicio: ");
   scanf("%d", &start.x);
-  printf("\nY Início: ");
+  printf("\nY Inicio: ");
   scanf("%d", &start.y);
   printf("\nX Objetivo: ");
   scanf("%d", &goal.x);
@@ -1054,20 +1054,20 @@ void menu(node *nd, Grafo *g, int **matrix) {
   int op, vDfs, source, search, ret_bfs;
 
   while (op != 14) {
-    printf("\nEscolha uma opção:\n");
-    printf("1 - Consultar grau de um nó\n");
+    printf("\nEscolha uma opcao:\n");
+    printf("1 - Consultar grau de um no\n");
     printf("2 - Consultar grau do grafo\n");
-    printf("3 - Consultar vizinhos de um nó\n");
-    printf("4 - Verficar se o grafo é conexo\n");
-    printf("5 - Verificar se o grafo é regular\n");
-    printf("6 - Verificar se um par de nós está conectado\n");
+    printf("3 - Consultar vizinhos de um no\n");
+    printf("4 - Verficar se o grafo e conexo\n");
+    printf("5 - Verificar se o grafo e regular\n");
+    printf("6 - Verificar se um par de nos esta conectado\n");
     printf("7 - Gerar aquivo para aplicativo Gephi\n");
     printf("8 - Busca em Profundidade\n");
     printf("9 - Busca em Largura\n");
-    printf("10 - Caminho Mínimo: Bellman-Ford\n");
-    printf("11 - Caminho Mínimo: Dijkstra\n");
-    printf("12 - Caminho Mínimo: Floyd-Warshall\n");
-    printf("13 - Caminho Mínimo: A Estrela\n");
+    printf("10 - Caminho Minimo: Bellman-Ford\n");
+    printf("11 - Caminho Minimo: Dijkstra\n");
+    printf("12 - Caminho Minimo: Floyd-Warshall\n");
+    printf("13 - Caminho Minimo: A Estrela\n");
     printf("14 - Sair\n");
     scanf("%d", &op);
 
@@ -1090,17 +1090,17 @@ void menu(node *nd, Grafo *g, int **matrix) {
 
     case 5:
       if (is_graph_regular(nd, g)) {
-        printf("Grafo é regular!\n");
+        printf("Grafo e regular!\n");
       } else {
-        printf("Grafo não é regular!\n");
+        printf("Grafo nao e regular!\n");
       }
       break;
 
     case 6:
       if (is_nodes_connected(nd, g)) {
-        printf("Os nós estão conectados!\n");
+        printf("Os nos estao conectados!\n");
       } else {
-        printf("Os nós não estão conectados!\n");
+        printf("Os nos nao estao conectados!\n");
       }
       break;
 
@@ -1112,7 +1112,7 @@ void menu(node *nd, Grafo *g, int **matrix) {
       // Depth First Search
       printf("\n * * * * * * * * * * * * * * * * * * * * * \n");
       printf("* * * * * * Busca em Profundidade * * * * * * \n\n");
-      printf("Escolha um vértice para começar a busca em profundidade: \n");
+      printf("Escolha um vertice para começar a busca em profundidade: \n");
       scanf("%d", &vDfs);
       depth_first_search(nd, g, vDfs);
       break;
@@ -1121,9 +1121,9 @@ void menu(node *nd, Grafo *g, int **matrix) {
       // Breadth First Search
       printf("\n * * * * * * * * * * * * * * * * * * * * * \n");
       printf("* * * * * * Busca em Largura * * * * * * \n\n");
-      printf("Escolha um vértice para começar a busca em largura: \n");
+      printf("Escolha um vertice para começar a busca em largura: \n");
       scanf("%d", &source);
-      printf("Escolha o vértice que deseja encontrar: \n");
+      printf("Escolha o vertice que deseja encontrar: \n");
       scanf("%d", &search);
       ret_bfs = breadth_first_search(nd, g, matrix, source, search);
 
@@ -1145,14 +1145,14 @@ void menu(node *nd, Grafo *g, int **matrix) {
         //printf(" - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
       }
       time(&end_time_b);
-      printf("Tempo de execução: %d segundos\n", (int)(end_time_b - start_time_b));
+      printf("Tempo de execucao: %d segundos\n", (int)(end_time_b - start_time_b));
       break;
 
     case 11:
       time(&start_time_d);
       dijkstra(nd, g, matrix);
       time(&end_time_d);
-      printf("Tempo de execução: %d segundos\n", (int)(end_time_d - start_time_d));
+      printf("Tempo de execucao: %d segundos\n", (int)(end_time_d - start_time_d));
       break;
 
     case 12:
@@ -1162,12 +1162,12 @@ void menu(node *nd, Grafo *g, int **matrix) {
       floyd_warshall(nd, matrix);
       //printMatrixFW();
       time(&end_time_f);
-      printf("Tempo de execução: %d segundos\n", (int)(end_time_f - start_time_f));
+      printf("Tempo de execucao: %d segundos\n", (int)(end_time_f - start_time_f));
       break;
     case 13:
       printf("\nA Estrela * * * * * * * * * * * * * \n");
       aEstrela();
-      printf("Tempo de execução: %d segundos\n", (int)(end_time_a - start_time_a));
+      printf("Tempo de execucao: %d segundos\n", (int)(end_time_a - start_time_a));
       break;
     }
   }
